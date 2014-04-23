@@ -31,7 +31,7 @@ class Player(Player):
         for line in check_output('mocp -i').splitlines():
             info_value = self.get_info_value(line)
             if line.startswith('State: '):
-                data['state'] = info_value.lower()
+                data['state'] = (info_value or '').lower()
             elif line.startswith('Artist: '):
                 data['artist'] = info_value or ''
             elif line.startswith('Album: '):
@@ -41,7 +41,7 @@ class Player(Player):
             elif line.startswith('File: '):
                 data['file'] = info_value
             elif line.startswith('TotalSec: '):
-                data['length'] = int(info_value)
+                data['length'] = int(info_value or '0')
 
         for k in data:
             setattr(self, k, data[k])

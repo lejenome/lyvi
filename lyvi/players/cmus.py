@@ -34,7 +34,7 @@ class Player(Player):
 
         for line in check_output('cmus-remote -Q').splitlines():
             if line.startswith('status '):
-                data['state'] = line.split()[1] or ''
+                data['state'] = (line.split()[1] or '').replace('playing', 'play')
                 for x, y in (('playing', 'play'), ('paused', 'pause'), ('stopped', 'stop')):
                     data['state'] = data['state'].replace(x, y)
             elif line.startswith('tag artist '):

@@ -23,7 +23,7 @@ class Player(Player):
             return info_line.split(maxsplit=1)[1]
         except IndexError:
             # Empty value.
-            return None
+            return ''
 
     def get_status(self):
         data = {'artist': None, 'album': None, 'title': None, 'file': None, 'length': None}
@@ -31,13 +31,13 @@ class Player(Player):
         for line in check_output('mocp -i').splitlines():
             info_value = self.get_info_value(line)
             if line.startswith('State: '):
-                data['state'] = (info_value or '').lower()
+                data['state'] = info_value.lower()
             elif line.startswith('Artist: '):
-                data['artist'] = info_value or ''
+                data['artist'] = info_value
             elif line.startswith('Album: '):
-                data['album'] = info_value or ''
+                data['album'] = info_value
             elif line.startswith('SongTitle: '):
-                data['title'] = info_value or ''
+                data['title'] = info_value
             elif line.startswith('File: '):
                 data['file'] = info_value
             elif line.startswith('TotalSec: '):

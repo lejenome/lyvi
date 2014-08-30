@@ -27,7 +27,7 @@ class Player(Player):
             return info_line.split(maxsplit=index)[index]
         except IndexError:
             # Empty value.
-            return None
+            return ''
 
     def get_status(self):
         data = {'artist': None, 'album': None, 'title': None, 'file': None, 'length': None}
